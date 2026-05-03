@@ -1,0 +1,39 @@
+<section class="panel">
+  <h2 class="panel__title">Visualizations</h2>
+
+  @if (loading) {
+    <div class="state-loading" aria-busy="true">Loading…</div>
+  } @else if (error) {
+    <div class="state-error" role="alert">{{ error }}</div>
+  } @else if (!charts) {
+    <p class="state-empty">No charts available.</p>
+  } @else {
+
+    <div class="charts-grid">
+
+      <figure class="chart-card">
+        <figcaption class="chart-card__caption">
+          Completion Rate by Time of Day
+        </figcaption>
+        <img
+          [src]="toSrc(charts.bar_completion_by_time_of_day)"
+          alt="Bar chart showing completion rate for morning, afternoon, and night"
+          class="chart-card__img"
+        />
+      </figure>
+
+      <figure class="chart-card">
+        <figcaption class="chart-card__caption">
+          Completion Rate: Energy Level × Task Type
+        </figcaption>
+        <img
+          [src]="toSrc(charts.heatmap_energy_vs_completion)"
+          alt="Heatmap of completion rate across energy levels and task types"
+          class="chart-card__img"
+        />
+      </figure>
+
+    </div>
+
+  }
+</section>

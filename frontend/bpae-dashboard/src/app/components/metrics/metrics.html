@@ -1,0 +1,86 @@
+<section class="panel">
+  <h2 class="panel__title">Metrics</h2>
+
+  @if (loading) {
+    <div class="state-loading" aria-busy="true">Loading…</div>
+  } @else if (error) {
+    <div class="state-error" role="alert">{{ error }}</div>
+  } @else if (metrics) {
+
+    <!-- ── Top KPI rings ── -->
+    <div class="metrics-grid">
+
+      <div class="metric-card">
+        <div class="metric-card__ring-wrap">
+          <svg class="metric-card__ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="metric-card__ring-track" cx="60" cy="60" r="50"/>
+            <circle class="metric-card__ring-fill" cx="60" cy="60" r="50"
+              [style.stroke-dashoffset]="ringOffset(metrics.productivity_score.mean)"/>
+          </svg>
+          <div class="metric-card__ring-inner">
+            <span class="metric-card__value">{{ score100(metrics.productivity_score.mean) }}</span>
+            <span class="metric-card__unit">/ 100</span>
+          </div>
+        </div>
+        <div class="metric-card__meta">
+          <span class="metric-card__label">Productivity Score</span>
+          <span class="metric-card__desc">Mean across all sessions</span>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-card__ring-wrap">
+          <svg class="metric-card__ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="metric-card__ring-track" cx="60" cy="60" r="50"/>
+            <circle class="metric-card__ring-fill metric-card__ring-fill--steel" cx="60" cy="60" r="50"
+              [style.stroke-dashoffset]="ringOffset(metrics.completion_rate.by_task_type[bestTaskType(metrics)])"/>
+          </svg>
+          <div class="metric-card__ring-inner">
+            <span class="metric-card__value">{{ pct(metrics.completion_rate.by_task_type[bestTaskType(metrics)]) }}</span>
+          </div>
+        </div>
+        <div class="metric-card__meta">
+          <span class="metric-card__label">Top Completion Rate</span>
+          <span class="metric-card__desc">{{ bestTaskType(metrics).replace('_', ' ') }}</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Breakdown rows ── -->
+    <div class="metrics-breakdown">
+
+      <div class="breakdown-block">
+        <h3 class="breakdown-block__title">Completion by Time of Day</h3>
+        @for (key of objectKeys(metrics.completion_rate.by_time_of_day); track key) {
+          <div class="breakdown-row">
+            <span class="breakdown-row__label">{{ key }}</span>
+            <div class="breakdown-row__bar-wrap">
+              <div class="breakdown-row__bar"
+                [style.width]="pct(metrics.completion_rate.by_time_of_day[key])">
+              </div>
+            </div>
+            <span class="breakdown-row__value">{{ pct(metrics.completion_rate.by_time_of_day[key]) }}</span>
+          </div>
+        }
+      </div>
+
+      <div class="breakdown-block">
+        <h3 class="breakdown-block__title">Completion by Task Type</h3>
+        @for (key of objectKeys(metrics.completion_rate.by_task_type); track key) {
+          <div class="breakdown-row">
+            <span class="breakdown-row__label">{{ key.replace('_', ' ') }}</span>
+            <div class="breakdown-row__bar-wrap">
+              <div class="breakdown-row__bar breakdown-row__bar--steel"
+                [style.width]="pct(metrics.completion_rate.by_task_type[key])">
+              </div>
+            </div>
+            <span class="breakdown-row__value">{{ pct(metrics.completion_rate.by_task_type[key]) }}</span>
+          </div>
+        }
+      </div>
+
+    </div>
+
+  }
+</section>

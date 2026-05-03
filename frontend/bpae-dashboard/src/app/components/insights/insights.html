@@ -1,0 +1,46 @@
+<section class="panel">
+  <h2 class="panel__title">Insights</h2>
+
+  @if (loading) {
+    <div class="state-loading" aria-busy="true">Loading…</div>
+  } @else if (error) {
+    <div class="state-error" role="alert">{{ error }}</div>
+  } @else if (insights.length === 0) {
+    <p class="state-empty">No insights available.</p>
+  } @else {
+
+    <!-- Card -->
+    <div class="carousel">
+      <div class="carousel__card">
+        <div class="carousel__card-icon">💡</div>
+        <p class="carousel__card-text">{{ insights[current] }}</p>
+        <span class="carousel__card-counter">{{ current + 1 }} / {{ total }}</span>
+      </div>
+
+      <!-- Dot indicators -->
+      <div class="carousel__dots" role="tablist" aria-label="Insight navigation">
+        @for (item of insights; track item; let i = $index) {
+          <button
+            class="carousel__dot"
+            [class.carousel__dot--active]="i === current"
+            (click)="goTo(i)"
+            [attr.aria-label]="'Insight ' + (i + 1)"
+            role="tab"
+            [attr.aria-selected]="i === current">
+          </button>
+        }
+      </div>
+
+      <!-- Prev / Next -->
+      <div class="carousel__nav">
+        <button class="carousel__nav-btn" (click)="prev()" aria-label="Previous insight">
+          ‹
+        </button>
+        <button class="carousel__nav-btn" (click)="next()" aria-label="Next insight">
+          ›
+        </button>
+      </div>
+    </div>
+
+  }
+</section>

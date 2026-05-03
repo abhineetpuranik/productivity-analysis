@@ -1,0 +1,128 @@
+.seg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.seg-card {
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+
+  &--high {
+    border-color: rgba(5, 150, 105, 0.3);
+    background: rgba(5, 150, 105, 0.04);
+  }
+
+  &--low {
+    border-color: rgba(220, 38, 38, 0.25);
+    background: rgba(220, 38, 38, 0.04);
+  }
+
+  &--mid {
+    border-color: rgba(206, 162, 115, 0.3);
+    background: rgba(206, 162, 115, 0.05);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  &__name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__count {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 0.1rem 0.5rem;
+  }
+
+  &__rate {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+
+  &__stats {
+    display: flex;
+    gap: var(--space-sm);
+    padding: var(--space-xs) 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    margin: 0.25rem 0;
+  }
+
+  &__task {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: capitalize;
+
+    strong { color: var(--accent-dark); font-weight: 600; }
+  }
+}
+
+.seg-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+
+  &__val {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__key {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.seg-insights {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+
+  &__item {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    padding: 0.5rem var(--space-sm);
+    background: var(--surface-raised);
+    border-left: 3px solid var(--steel);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+}

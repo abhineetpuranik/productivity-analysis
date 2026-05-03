@@ -1,0 +1,141 @@
+/* ── Google Fonts ──────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ── Design tokens — Blue Haze palette (light theme) ──────── */
+/*
+  Silent Navy   #102a6b  — primary surfaces, headers, key UI
+  Sandy Amber   #cea273  — accent gold, highlights, CTAs
+  Blue Current  #015185  — mid-blue accents
+  Steel Blue    #5990c0  — borders, rings, secondary elements
+  Light Cream   #fcedd3  — warm page background
+*/
+:root {
+  /* Backgrounds */
+  --bg:             #f5ede0;          /* warm cream page background */
+  --surface:        #ffffff;          /* white card surface */
+  --surface-raised: #fdf6ee;          /* very light cream for inner blocks */
+
+  /* Borders */
+  --border:         rgba(16, 42, 107, 0.15);
+  --border-subtle:  rgba(16, 42, 107, 0.08);
+
+  /* Typography */
+  --text-primary:   #102a6b;          /* Silent Navy */
+  --text-secondary: #2d4a8a;          /* mid navy */
+  --text-muted:     #7a8fb5;          /* muted blue-grey */
+
+  /* Accent — Sandy Amber */
+  --accent:         #cea273;
+  --accent-dark:    #b8854e;
+  --accent-light:   rgba(206, 162, 115, 0.15);
+  --accent-dim:     rgba(206, 162, 115, 0.08);
+
+  /* Secondary accent — Blue Current */
+  --accent2:        #015185;
+  --accent2-light:  rgba(1, 81, 133, 0.08);
+
+  /* Steel Blue */
+  --steel:          #5990c0;
+  --steel-light:    rgba(89, 144, 192, 0.12);
+
+  /* Semantic */
+  --color-success:       #059669;
+  --color-success-light: #ecfdf5;
+  --color-danger:        #dc2626;
+  --color-danger-light:  #fef2f2;
+  --color-warning:       #b8854e;
+  --color-warning-light: #fff7ed;
+
+  /* Spacing */
+  --space-xs:  0.375rem;
+  --space-sm:  0.75rem;
+  --space-md:  1.25rem;
+  --space-lg:  2rem;
+  --space-xl:  3rem;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(16, 42, 107, 0.08), 0 1px 2px rgba(16, 42, 107, 0.05);
+  --shadow-md: 0 4px 12px rgba(16, 42, 107, 0.10), 0 2px 4px rgba(16, 42, 107, 0.06);
+  --shadow-lg: 0 8px 24px rgba(16, 42, 107, 0.12), 0 4px 8px rgba(16, 42, 107, 0.06);
+}
+
+/* ── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Panel ─────────────────────────────────────────────────── */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+
+  &__title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--steel);
+    margin: 0 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--border);
+  }
+}
+
+/* ── Badges ────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+
+  &--high    { background: var(--color-danger-light);   color: var(--color-danger); }
+  &--medium  { background: var(--color-warning-light);  color: var(--color-warning); }
+  &--low     { background: var(--color-success-light);  color: var(--color-success); }
+  &--accent  { background: var(--accent-light);         color: var(--accent-dark); }
+  &--steel   { background: var(--steel-light);          color: var(--steel); }
+}
+
+/* ── States ────────────────────────────────────────────────── */
+.state-loading {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: var(--space-xs) 0;
+}
+
+.state-error {
+  font-size: 0.85rem;
+  color: var(--color-danger);
+  background: var(--color-danger-light);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: var(--radius-md);
+  padding: 0.75rem var(--space-sm);
+  line-height: 1.5;
+}
+
+.state-empty {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin: 0;
+}

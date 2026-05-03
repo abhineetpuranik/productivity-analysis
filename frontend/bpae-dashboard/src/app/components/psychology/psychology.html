@@ -1,0 +1,19 @@
+<section class="panel">
+  <h2 class="panel__title">Behavior</h2>
+
+  @if (loading) {
+    <div class="state-loading" aria-busy="true">Loading…</div>
+  } @else if (error) {
+    <div class="state-error" role="alert">{{ error }}</div>
+  } @else if (behavior) {
+    <div class="behavior-card">
+      <div class="behavior-card__label-row">
+        <span class="behavior-card__icon">🧬</span>
+        <span class="behavior-card__label">Behavioral Summary</span>
+      </div>
+      <blockquote class="behavior-card__body">
+        <p class="behavior-card__text">{{ behavior.summary }}</p>
+      </blockquote>
+    </div>
+  }
+</section>

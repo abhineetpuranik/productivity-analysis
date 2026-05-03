@@ -1,0 +1,36 @@
+.behavior-card {
+  background: var(--accent2-light);
+  border: 1px solid rgba(1, 81, 133, 0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+
+  &__label-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  &__icon   { font-size: 1.1rem; line-height: 1; }
+
+  &__label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent2);
+  }
+
+  &__body {
+    margin: 0;
+    padding: 0 0 0 var(--space-sm);
+    border-left: 3px solid var(--steel);
+  }
+
+  &__text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin: 0;
+  }
+}

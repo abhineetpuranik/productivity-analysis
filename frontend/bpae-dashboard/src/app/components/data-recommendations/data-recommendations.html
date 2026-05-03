@@ -1,0 +1,67 @@
+<section class="panel">
+  <h2 class="panel__title">Data-Driven Recommendations</h2>
+
+  @if (loading) {
+    <div class="state-loading" aria-busy="true">Loading…</div>
+  } @else if (error) {
+    <div class="state-error" role="alert">{{ error }}</div>
+  } @else if (!dataRecs) {
+    <p class="state-empty">No recommendations available.</p>
+  } @else {
+
+    <!-- Key stats strip -->
+    <div class="dr-stats">
+      <div class="dr-stat">
+        <span class="dr-stat__val">{{ dataRecs.best_time_of_day.best_slot }}</span>
+        <span class="dr-stat__key">Best Time of Day</span>
+      </div>
+      <div class="dr-stat">
+        <span class="dr-stat__val">{{ pct(dataRecs.best_time_of_day.lift_over_worst) }}</span>
+        <span class="dr-stat__key">Lift vs Worst Slot</span>
+      </div>
+      @if (dataRecs.distraction_threshold.threshold !== null) {
+        <div class="dr-stat">
+          <span class="dr-stat__val">{{ dataRecs.distraction_threshold.threshold }}</span>
+          <span class="dr-stat__key">Distraction Threshold</span>
+        </div>
+        <div class="dr-stat">
+          <span class="dr-stat__val">
+            {{ pct(dataRecs.distraction_threshold.rate_below_threshold ?? 0) }}
+            vs
+            {{ pct(dataRecs.distraction_threshold.rate_above_threshold ?? 0) }}
+          </span>
+          <span class="dr-stat__key">Below vs Above Threshold</span>
+        </div>
+      }
+    </div>
+
+    <!-- Recommendation carousel -->
+    @if (recs.length > 0) {
+      <div class="dr-carousel">
+        <div class="dr-card">
+          <span class="dr-card__num">{{ current + 1 }} / {{ total }}</span>
+          <p class="dr-card__text">{{ recs[current] }}</p>
+        </div>
+
+        <div class="dr-carousel__dots" role="tablist" aria-label="Recommendation navigation">
+          @for (rec of recs; track rec; let i = $index) {
+            <button
+              class="dr-carousel__dot"
+              [class.dr-carousel__dot--active]="i === current"
+              (click)="goTo(i)"
+              [attr.aria-label]="'Recommendation ' + (i + 1)"
+              role="tab"
+              [attr.aria-selected]="i === current">
+            </button>
+          }
+        </div>
+
+        <div class="dr-carousel__nav">
+          <button class="dr-carousel__nav-btn" (click)="prev()" aria-label="Previous">‹</button>
+          <button class="dr-carousel__nav-btn" (click)="next()" aria-label="Next">›</button>
+        </div>
+      </div>
+    }
+
+  }
+</section>

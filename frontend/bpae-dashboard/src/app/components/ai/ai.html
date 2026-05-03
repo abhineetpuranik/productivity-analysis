@@ -1,0 +1,55 @@
+<section class="panel">
+  <h2 class="panel__title">AI Insight</h2>
+
+  <div class="ai-wrap">
+
+    <!-- ── Idle state ── -->
+    @if (state === 'idle') {
+      <div class="ai-empty">
+        <span class="ai-empty__icon">✦</span>
+        <p class="ai-empty__text">Click below to generate a personalised coaching insight based on your productivity data.</p>
+      </div>
+    }
+
+    <!-- ── Loading ── -->
+    @if (state === 'loading') {
+      <div class="ai-loading" aria-live="polite" aria-busy="true">
+        <span class="ai-loading__spinner" aria-hidden="true"></span>
+        <span class="ai-loading__label">Analysing your data…</span>
+      </div>
+    }
+
+    <!-- ── Result ── -->
+    @if (state === 'success' && generated) {
+      <div class="ai-result" aria-live="polite">
+        <div class="ai-result__header">
+          <span class="ai-result__icon">💡</span>
+          <span class="ai-result__label">Coaching Insight</span>
+        </div>
+        <p class="ai-result__text">{{ generated.text }}</p>
+      </div>
+    }
+
+    <!-- ── Error ── -->
+    @if (state === 'error') {
+      <div class="state-error" role="alert">{{ error }}</div>
+    }
+
+    <!-- ── Button ── -->
+    <button
+      class="ai-btn"
+      [class.ai-btn--loading]="state === 'loading'"
+      [disabled]="state === 'loading'"
+      (click)="generate()">
+      @if (state === 'loading') {
+        <span class="ai-btn__spinner" aria-hidden="true"></span>
+        Generating…
+      } @else if (state === 'success') {
+        ↺ Regenerate
+      } @else {
+        ✦ Generate AI Insight
+      }
+    </button>
+
+  </div>
+</section>

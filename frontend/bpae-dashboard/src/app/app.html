@@ -1,0 +1,77 @@
+<div class="dashboard">
+
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="dashboard__header">
+    <div class="dashboard__brand">
+      <span class="dashboard__logo" aria-hidden="true">◈</span>
+      <h1 class="dashboard__title">BPAE Dashboard</h1>
+    </div>
+    <span class="dashboard__subtitle">Behavioral &middot; Psychological &middot; AI &middot; Engagement</span>
+  </header>
+
+  <!-- ── App-level loading ───────────────────────────────────── -->
+  @if (loading) {
+    <div class="dashboard__loading" aria-live="polite" aria-busy="true">
+      <span class="dashboard__loading-spinner" aria-hidden="true"></span>
+      <span>Loading analysis…</span>
+    </div>
+  }
+
+  <!-- ── App-level error ────────────────────────────────────── -->
+  @else if (error) {
+    <div class="dashboard__error" role="alert">
+      <span class="dashboard__error-icon" aria-hidden="true">⚠</span>
+      <div>
+        <strong>Could not load dashboard</strong>
+        <p>{{ error }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- ── Main grid ──────────────────────────────────────────── -->
+  @else if (data) {
+    <main class="dashboard__grid">
+
+      <!-- Overview — metrics KPIs -->
+      <p class="dashboard__section-label" aria-hidden="true">Overview</p>
+      <div class="dashboard__full-row">
+        <app-metrics [metrics]="data.metrics" />
+      </div>
+
+      <!-- Analysis — pattern insights + psychology-based recommendations -->
+      <p class="dashboard__section-label" aria-hidden="true">Analysis</p>
+      <div class="dashboard__col">
+        <app-insights [insights]="data.insights" />
+      </div>
+      <div class="dashboard__col">
+        <app-recommendations [recommendations]="data.recommendations" />
+      </div>
+
+      <!-- Data Intelligence — segmentation + data-driven recommendations -->
+      <p class="dashboard__section-label" aria-hidden="true">Data Intelligence</p>
+      <div class="dashboard__full-row">
+        <app-segmentation [segmentation]="data.segmentation" />
+      </div>
+      <div class="dashboard__full-row">
+        <app-data-recommendations [dataRecs]="data.data_recommendations" />
+      </div>
+
+      <!-- Behavioral Intelligence — psychology + Groq AI -->
+      <p class="dashboard__section-label" aria-hidden="true">Behavioral Intelligence</p>
+      <div class="dashboard__col">
+        <app-psychology [behavior]="data.behavioral_explanation" />
+      </div>
+      <div class="dashboard__col">
+        <app-ai />
+      </div>
+
+      <!-- Visualizations — matplotlib charts -->
+      <p class="dashboard__section-label" aria-hidden="true">Visualizations</p>
+      <div class="dashboard__full-row">
+        <app-charts [charts]="data.charts" />
+      </div>
+
+    </main>
+  }
+
+</div>

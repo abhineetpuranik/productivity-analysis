@@ -1,0 +1,54 @@
+<section class="panel">
+  <h2 class="panel__title">Recommendations</h2>
+
+  @if (loading) {
+    <div class="state-loading" aria-busy="true">Loading…</div>
+  } @else if (error) {
+    <div class="state-error" role="alert">{{ error }}</div>
+  } @else if (recommendations.length === 0) {
+    <p class="state-empty">No recommendations available.</p>
+  } @else {
+
+    <div class="rec-carousel">
+
+      <!-- Card -->
+      <div class="rec-card" [class.rec-card--top]="isTop(current)">
+        <div class="rec-card__header">
+          <span class="rec-card__icon">{{ icon(current) }}</span>
+          @if (isTop(current)) {
+            <span class="rec-card__top-badge">Top Pick</span>
+          }
+          <span class="rec-card__counter">{{ current + 1 }} / {{ total }}</span>
+        </div>
+        <p class="rec-card__text">{{ recommendations[current] }}</p>
+      </div>
+
+      <!-- Dots -->
+      <div class="rec-carousel__dots" role="tablist" aria-label="Recommendation navigation">
+        @for (rec of recommendations; track rec; let i = $index) {
+          <button
+            class="rec-carousel__dot"
+            [class.rec-carousel__dot--active]="i === current"
+            [class.rec-carousel__dot--top]="isTop(i)"
+            (click)="goTo(i)"
+            [attr.aria-label]="'Recommendation ' + (i + 1)"
+            role="tab"
+            [attr.aria-selected]="i === current">
+          </button>
+        }
+      </div>
+
+      <!-- Nav -->
+      <div class="rec-carousel__nav">
+        <button class="rec-carousel__nav-btn" (click)="prev()" aria-label="Previous recommendation">
+          ‹
+        </button>
+        <button class="rec-carousel__nav-btn" (click)="next()" aria-label="Next recommendation">
+          ›
+        </button>
+      </div>
+
+    </div>
+
+  }
+</section>

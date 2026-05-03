@@ -1,0 +1,116 @@
+.dr-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.dr-stat {
+  flex: 1;
+  min-width: 120px;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  &__val {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-dark);
+    font-variant-numeric: tabular-nums;
+    text-transform: capitalize;
+  }
+
+  &__key {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+}
+
+.dr-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.dr-card {
+  background: linear-gradient(135deg, var(--accent-light) 0%, var(--surface) 100%);
+  border: 1px solid rgba(206, 162, 115, 0.3);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-sm);
+
+  &__num {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    align-self: flex-end;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.dr-carousel {
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: none;
+    background: var(--border);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+
+    &--active { background: var(--accent); transform: scale(1.3); }
+    &:hover:not(.dr-carousel__dot--active) { background: var(--steel); }
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  &__nav-btn {
+    flex: 1;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+
+    &:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+  }
+}

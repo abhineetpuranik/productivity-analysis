@@ -1,0 +1,55 @@
+<section class="panel">
+  <h2 class="panel__title">User Segmentation</h2>
+
+  @if (loading) {
+    <div class="state-loading" aria-busy="true">Loading…</div>
+  } @else if (error) {
+    <div class="state-error" role="alert">{{ error }}</div>
+  } @else if (!segmentation) {
+    <p class="state-empty">No segmentation data available.</p>
+  } @else {
+
+    <!-- Segment comparison cards -->
+    <div class="seg-grid">
+      @for (segment of segments; track segment) {
+        @if (stats(segment); as s) {
+          <div class="seg-card seg-card--{{ segmentColor(segment) }}">
+            <div class="seg-card__header">
+              <span class="seg-card__name">{{ segment }}</span>
+              <span class="seg-card__count">{{ s.user_count }} users</span>
+            </div>
+            <div class="seg-card__rate">{{ pct(s.avg_completion_rate) }}</div>
+            <div class="seg-card__label">avg completion</div>
+            <div class="seg-card__stats">
+              <div class="seg-stat">
+                <span class="seg-stat__val">{{ s.avg_energy.toFixed(2) }}</span>
+                <span class="seg-stat__key">energy</span>
+              </div>
+              <div class="seg-stat">
+                <span class="seg-stat__val">{{ s.avg_focus.toFixed(2) }}</span>
+                <span class="seg-stat__key">focus</span>
+              </div>
+              <div class="seg-stat">
+                <span class="seg-stat__val">{{ s.avg_distractions.toFixed(1) }}</span>
+                <span class="seg-stat__key">distractions</span>
+              </div>
+            </div>
+            <div class="seg-card__task">
+              Best task: <strong>{{ s.preferred_task.replace('_', ' ') }}</strong>
+            </div>
+          </div>
+        }
+      }
+    </div>
+
+    <!-- Insight list -->
+    @if (segmentation.insights.length > 0) {
+      <ul class="seg-insights">
+        @for (insight of segmentation.insights; track insight) {
+          <li class="seg-insights__item">{{ insight }}</li>
+        }
+      </ul>
+    }
+
+  }
+</section>
