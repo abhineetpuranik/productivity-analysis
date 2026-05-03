@@ -1,0 +1,11 @@
+# Environment — contains API keys, never commit this
+.env
+.env.*
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# SQLite database — auto-generated from productivity.csv on first run
+data/productivity.db
